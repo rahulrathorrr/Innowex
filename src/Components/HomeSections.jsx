@@ -125,7 +125,7 @@ const HomeSections = () => {
         </div>
       </section>
 
-      {/* 3. HOW IT WORKS (Timeline) */}
+      {/* 3. HOW IT WORKS (Timeline) - FIXED VERSION */}
       <section className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="absolute right-0 top-1/2 w-96 h-96 bg-indigo-600/10 blur-[100px] rounded-full z-[-1]" />
         
@@ -134,9 +134,9 @@ const HomeSections = () => {
           <p className="text-gray-400 max-w-2xl mx-auto">A seamless 5-step process to bring intelligent automation to your business.</p>
         </motion.div>
 
-        <div className="relative max-w-4xl mx-auto">
-          {/* Vertical Line */}
-          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-pink-500 via-purple-500 to-indigo-500 opacity-30 md:left-1/2 md:-translate-x-1/2"></div>
+        <div className="relative max-w-5xl mx-auto">
+          {/* Vertical Line - Desktop: Center, Mobile: Left */}
+          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-pink-500 via-purple-500 to-indigo-500 opacity-30 md:-translate-x-1/2"></div>
 
           {[
             { step: '1', title: 'Discovery', icon: Search, desc: 'We start by understanding your workflows, pain points, and automation goals through detailed consultation.' },
@@ -147,22 +147,27 @@ const HomeSections = () => {
           ].map((item, index) => (
             <motion.div 
               key={item.step}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className={`relative flex items-center justify-between md:justify-normal w-full mb-12 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
+              className={`relative flex items-center mb-16 md:mb-24 ${index % 2 === 0 ? 'md:flex-row-reverse' : 'md:flex-row'}`}
             >
-              <div className="hidden md:block w-5/12"></div>
+              {/* Spacer for Desktop Zig-Zag */}
+              <div className="hidden md:block md:w-1/2"></div>
               
-              <div className="z-10 flex items-center justify-center w-16 h-16 rounded-full bg-[#1a0b2e] border-2 border-pink-500 shadow-[0_0_15px_rgba(236,72,153,0.5)] md:absolute md:left-1/2 md:-translate-x-1/2 shrink-0">
+              {/* The Icon/Circle */}
+              <div className="absolute left-0 md:left-1/2 flex items-center justify-center w-16 h-16 rounded-full bg-[#1a0b2e] border-2 border-pink-500 shadow-[0_0_15px_rgba(236,72,153,0.4)] z-20 -translate-x-0 md:-translate-x-1/2">
                 <item.icon className="text-white w-6 h-6" />
               </div>
               
-              <div className="w-[calc(100%-5rem)] md:w-5/12 bg-white/5 border border-white/10 p-6 rounded-2xl ml-4 md:ml-0 backdrop-blur-sm">
-                <span className="text-pink-400 font-bold text-sm mb-2 block">Step {item.step}</span>
-                <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
-                <p className="text-gray-400 text-sm">{item.desc}</p>
+              {/* Content Card */}
+              <div className={`w-full md:w-1/2 pl-24 md:pl-0 ${index % 2 === 0 ? 'md:pr-16' : 'md:pl-16'}`}>
+                <div className="bg-white/5 border border-white/10 p-6 rounded-2xl backdrop-blur-sm hover:border-pink-500/30 transition-colors">
+                  <span className="text-pink-400 font-bold text-sm mb-2 block">Step {item.step}</span>
+                  <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
+                </div>
               </div>
             </motion.div>
           ))}
